@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-black text-white;
+}
+
+/* Add smooth transition for header background on scroll */
+header {
+  transition: background-color 0.3s ease;
+}
+
+/* Animation pour l'indicateur de défilement */
+@keyframes scroll {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(10px); opacity: 0; }
+}
+
+.animate-scroll {
+  animation: scroll 1.5s infinite;
+}
+
+/* Dialog styles */
+@layer components {
+  .DialogOverlay {
+    @apply fixed inset-0 bg-black/50 backdrop-blur-sm z-[100];
+  }
+
+  .DialogContent {
+    @apply fixed top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] w-[90vw] max-w-md bg-gray-900 rounded-lg shadow-xl p-6 max-h-[85vh] overflow-y-auto z-[101];
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .container {
+    @apply px-4;
+  }
+
+  /* Improve touch targets on mobile */
+  button, 
+  select,
+  a {
+    @apply min-h-[44px] min-w-[44px];
+  }
+
+  /* Adjust spacing for mobile */
+  .space-y-4 > * {
+    @apply my-3;
+  }
+}
+
+/* Reduce motion if preferred */
+@media (prefers-reduced-motion: reduce) {
+  .animate-bounce,
+  .animate-scroll {
+    animation: none;
+  }
+
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
